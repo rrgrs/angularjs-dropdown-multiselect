@@ -2,8 +2,8 @@
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
 
-directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', '$parse',
-    function ($filter, $document, $compile, $parse) {
+directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', '$parse', '$window',
+    function ($filter, $document, $compile, $parse, $window) {
 
         return {
             restrict: 'AE',
@@ -22,7 +22,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                 var template = '<div class="multiselect-parent btn-group dropdown-multiselect">';
                 template += '<button type="button" class="dropdown-toggle" ng-class="settings.buttonClasses" ng-click="toggleDropdown()">{{getButtonText()}}&nbsp;<span class="caret"></span></button>';
-                template += '<ul class="dropdown-menu dropdown-menu-form" ng-style="{display: open ? \'block\' : \'none\', height : settings.scrollable ? settings.scrollableHeight : \'auto\' }" style="overflow: scroll" >';
+                template += '<div ng-class="{isFloating: browser_is_small}"><ul class="dropdown-menu dropdown-menu-form" ng-style="{display: open ? \'block\' : \'none\', height : settings.scrollable ? settings.scrollableHeight : \'auto\' }" style="overflow: scroll" >';
                 template += '<li ng-hide="!settings.showCheckAll || settings.selectionLimit > 0"><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  {{texts.checkAll}}</a>';
                 template += '<li ng-show="settings.showUncheckAll"><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>   {{texts.uncheckAll}}</a></li>';
                 template += '<li ng-hide="(!settings.showCheckAll || settings.selectionLimit > 0) && !settings.showUncheckAll" class="divider"></li>';
@@ -49,14 +49,25 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '<li class="divider" ng-show="settings.selectionLimit > 1"></li>';
                 template += '<li role="presentation" ng-show="settings.selectionLimit > 1"><a role="menuitem">{{selectedModel.length}} {{texts.selectionOf}} {{settings.selectionLimit}} {{texts.selectionCount}}</a></li>';
 
-                template += '</ul>';
+                template += '<li role="presentation" ng-if="settings.displayCloseButton === true"><button ng-click="open = false" ng-bind="settings.closeButtonText"></button></li>';
+
+                template += '</ul></div>';
                 template += '</div>';
 
                 element.html(template);
             },
             link: function ($scope, $element, $attrs) {
+
+                $scope.browser_is_small = ($window.innerWidth < 641);
+
+                angular.element($window).on('resize', function () {
+                    $scope.$apply(function() {
+                      $scope.browser_is_small = ($window.innerWidth < 641);
+                    });
+                });
+
                 var $dropdownTrigger = $element.children()[0];
-                
+
                 $scope.toggleDropdown = function () {
                     $scope.open = !$scope.open;
                 };
@@ -93,7 +104,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     groupBy: $attrs.groupBy || undefined,
                     groupByTextProvider: null,
                     smartButtonMaxItems: 0,
-                    smartButtonTextConverter: angular.noop
+                    smartButtonTextConverter: angular.noop,
+                    displayCloseButton: false,
+                    closeButtonText: 'Close',
+                    dynamicButtonTextSuffixSingular: 'checked',
+                    dynamicButtonTextSuffixPlural: 'checked'
                 };
 
                 $scope.texts = {
@@ -102,8 +117,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     selectionCount: 'checked',
                     selectionOf: '/',
                     searchPlaceholder: 'Search...',
-                    buttonDefaultText: 'Select',
-                    dynamicButtonTextSuffix: 'checked'
+                    buttonDefaultText: 'Select'
                 };
 
                 $scope.searchFilter = $scope.searchFilter || '';
@@ -207,8 +221,10 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                             if (totalSelected === 0) {
                                 return $scope.texts.buttonDefaultText;
+                            } else if (totalSelected === 1) {
+                                return totalSelected + ' ' + $scope.settings.dynamicButtonTextSuffixSingular;
                             } else {
-                                return totalSelected + ' ' + $scope.texts.dynamicButtonTextSuffix;
+                              return totalSelected + ' ' + $scope.settings.dynamicButtonTextSuffixPlural;
                             }
                         }
                     } else {

@@ -623,6 +623,104 @@ $scope.customFilter = 'a';
                 </div>
             </div>
         </accordion-group>
+        <accordion-group heading="Customize Input Text">
+            <div class="row">
+                <div class="col-xs-12">
+                    You can show a "close" button and customize the text of the close button and the input button itself.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <h3>Demo</h3>
+                    <div class="well">
+                        <div>
+                            <div ng-dropdown-multiselect options="example16data" selected-model="example16model" extra-settings="example16settings"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h3>The model:</h3>
+                    <pre>{{example16model|json}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Code</h3>
+                    <div class="well">
+                        <div>
+                            <div hljs>
+//HTML
+<div ng-dropdown-multiselect options="example16data" selected-model="example16model" extra-settings="example16settings"></div>
+
+//JS
+$scope.example16model = [];
+$scope.example16data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Lisa"},
+    {id: 4, label: "Nicole"},
+    {id: 5, label: "Danny"}];
+
+$scope.example16settings = {
+  dynamicButtonTextSuffixSingular: 'Singular',
+  dynamicButtonTextSuffixPlural: 'Plural'
+};
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
+        <accordion-group heading="Add Close Button with Custom Text">
+            <div class="row">
+                <div class="col-xs-12">
+                    You can show a "close" button and customize the text of the close button and the input button itself.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <h3>Demo</h3>
+                    <div class="well">
+                        <div>
+                            <div ng-dropdown-multiselect options="example17data" selected-model="example17model" extra-settings="example17settings"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h3>The model:</h3>
+                    <pre>{{example17model|json}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Code</h3>
+                    <div class="well">
+                        <div>
+                            <div hljs>
+//HTML
+<div ng-dropdown-multiselect options="example17data" selected-model="example17model" extra-settings="example17settings"></div>
+
+//JS
+$scope.example16model = [];
+$scope.example16data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Lisa"},
+    {id: 4, label: "Nicole"},
+    {id: 5, label: "Danny"}];
+
+$scope.example16settings = {
+  displayCloseButton: true,
+  closeButtonText: 'Custom Cancel',
+  dynamicButtonTextSuffixSingular: 'Singular',
+  dynamicButtonTextSuffixPlural: 'Plural'
+};
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
     </accordion>
     <h1>Full API Documentation</h1>
     <h2>Attributes</h2>

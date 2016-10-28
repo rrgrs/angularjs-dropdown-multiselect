@@ -12,7 +12,7 @@ config(['$routeProvider', '$locationProvider', '$compileProvider',
 
 
         var appPathRoute = '/';
-        var pagesPath = staticPath + 'javascripts/pages/';
+        var pagesPath = staticPath + 'pages/javascripts/pages/';
 
 
         $routeProvider.when('/', {

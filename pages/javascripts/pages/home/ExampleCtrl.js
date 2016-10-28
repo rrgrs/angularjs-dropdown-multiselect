@@ -154,5 +154,31 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
         enableSearch: true
     };
 
+		$scope.example16model = [];
+		$scope.example16data = [
+				{id: 1, label: "David"},
+				{id: 2, label: "Jhon"},
+				{id: 3, label: "Lisa"},
+				{id: 4, label: "Nicole"},
+				{id: 5, label: "Danny"}];
+
+		$scope.example16settings = {
+				dynamicButtonTextSuffixSingular: 'Singular',
+				dynamicButtonTextSuffixPlural: 'Plural'
+		};
+
+		$scope.example17model = [];
+		$scope.example17data = [
+				{id: 1, label: "David"},
+				{id: 2, label: "Jhon"},
+				{id: 3, label: "Lisa"},
+				{id: 4, label: "Nicole"},
+				{id: 5, label: "Danny"}];
+
+		$scope.example17settings = {
+				displayCloseButton: true,
+				closeButtonText: 'Custom Cancel'
+		};
+
     $scope.customFilter = 'a';
 }]);
