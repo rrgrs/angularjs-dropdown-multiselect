@@ -49,7 +49,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '<li class="divider" ng-show="settings.selectionLimit > 1"></li>';
                 template += '<li role="presentation" ng-show="settings.selectionLimit > 1"><a role="menuitem">{{selectedModel.length}} {{texts.selectionOf}} {{settings.selectionLimit}} {{texts.selectionCount}}</a></li>';
 
-                template += '<li role="presentation" ng-if="settings.displayCloseButton === true"><button ng-click="open = false" ng-bind="settings.closeButtonText"></button></li>';
+                template += '<li role="presentation" ng-if="settings.displayCloseButton === true"><button ng-click="toggleDropdown()" ng-bind="settings.closeButtonText"></button></li>';
 
                 template += '</ul></div>';
                 template += '</div>';
