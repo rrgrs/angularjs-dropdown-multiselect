@@ -21,7 +21,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                 var template = '<div class="SumoSelect multiselect-parent" ng-class="{open: open}">';
                 template += '<p class="CaptionCont SelectBox search" title="{{getButtonText()}}" ng-click="toggleDropdown()"><span>{{getButtonText()}}</span><label><i></i></label></p>';
-                template += '<div ng-class="{isFloating: browser_is_small}" ng-style="{display: open ? \'block\' : \'none\'}" class="optWrapper multiple"><ul class="options">';
+                template += '<div ng-class="{isFloating: browser_is_small}" class="optWrapper okCancelInMulti multiple"><ul class="options">';
                 template += '<li ng-hide="!settings.showCheckAll || settings.selectionLimit > 0"><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  {{texts.checkAll}}</a>';
                 template += '<li ng-show="settings.showUncheckAll"><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>   {{texts.uncheckAll}}</a></li>';
                 template += '<li ng-hide="(!settings.showCheckAll || settings.selectionLimit > 0) && !settings.showUncheckAll" class="divider"></li>';
@@ -40,7 +40,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '</li></ul>';
 
 
-                template += '<div class="MultiControls" ng-if="settings.displayCloseButton === true"><button class="btnOk" ng-click="toggleDropdown()">{{settings.closeButtonText}}</button></div>';
+                template += '<div class="MultiControls" ng-if="settings.displayCloseButton === true"><p class="btnOk" ng-click="toggleDropdown()">{{settings.closeButtonText}}</p></div>';
 
                 template += '</div></div>';
 
