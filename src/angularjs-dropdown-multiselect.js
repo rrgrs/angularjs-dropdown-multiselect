@@ -54,7 +54,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '</ul></div>';
                 template += '</div>';
 
-                element.html(template);
+                return template;
             },
             link: function ($scope, $element, $attrs) {
 
