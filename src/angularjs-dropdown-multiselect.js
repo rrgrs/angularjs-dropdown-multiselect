@@ -32,7 +32,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     template += '<li ng-repeat-start="option in orderedItems | filter: searchFilter" ng-show="getPropertyForObject(option, settings.groupBy) !== getPropertyForObject(orderedItems[$index - 1], settings.groupBy)" role="presentation" class="dropdown-header">{{ getGroupTitle(getPropertyForObject(option, settings.groupBy)) }}</li>';
                     template += '<li ng-repeat-end role="presentation">';
                 } else {
-                    template += '<li class="opt" ng-class="{selected: isChecked(getPropertyForObject(option,settings.idProp))}" ng-repeat="option in options | filter: searchFilter">';
+                    template += '<li class="opt" ng-class="{selected: isChecked(getPropertyForObject(option,settings.idProp))}" ng-repeat="option in options | filter: searchFilter track by $index">';
                 }
 
                 template += '<span ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><i></i></span><label ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">{{getPropertyForObject(option, settings.displayProp)}}</label>';
